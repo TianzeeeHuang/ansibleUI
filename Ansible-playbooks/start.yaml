@@ -9,7 +9,7 @@
       args:
         executable: /bin/bash
       vars:
-        vmid: 104
+        vmid: 100
       register: start_vm_output
 
     - name: Display the output of the qm start command
