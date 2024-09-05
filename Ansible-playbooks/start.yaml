@@ -1,0 +1,17 @@
+---
+- name: Start a VM on Proxmox VE
+  hosts: test_conference   # Define your PVE hosts in the inventory file
+  become: true       # Ensure privilege escalation is enabled
+  tasks:
+    - name: Start the Proxmox VM using qm
+      shell:
+        cmd: "qm start {{ vmid }}"
+      args:
+        executable: /bin/bash
+      vars:
+        vmid: 104
+      register: start_vm_output
+
+    - name: Display the output of the qm start command
+      debug:
+        var: start_vm_output.stdout
