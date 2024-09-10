@@ -5,7 +5,7 @@
   tasks:
     - name: Shutdown the Proxmox VM using qm
       shell:
-        cmd: "qm stop {{ vmid }}"
+        cmd: "qm shutdown {{ vmid }}"
       args:
         executable: /bin/bash
       vars:
