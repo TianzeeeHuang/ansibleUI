@@ -1,0 +1,29 @@
+---
+- name: Shutdown vm with qm and screen with rs232
+  hosts: test_conference   # Define your PVE hosts in the inventory file
+  become: true       # Ensure privilege escalation is enabled
+  tasks:
+    - name: Shutdown the Proxmox VM using qm
+      shell:
+        cmd: "qm stop {{ vmid }}"
+      args:
+        executable: /bin/bash
+      vars:
+        vmid: 100
+      register: start_vm_output
+
+    - name: Display the output of the qm start command
+      debug:
+        var: start_vm_output.stdout
+
+    - name: Ensure coreutils is installed (provides stty)
+      apt:
+        name: coreutils
+        state: present
+      become: true
+
+    - name: Configure serial port /dev/ttyUSB0 with stty
+      command: stty -F /dev/ttyUSB0 9600 cs8 -cstopb -parenb
+
+    - name: Send the .bin file to /dev/ttyUSB0
+      command: cat /root/binary/shutdown_screen.bin > /dev/ttyUSB0
