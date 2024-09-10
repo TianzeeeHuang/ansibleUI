@@ -16,9 +16,6 @@
       debug:
         var: start_vm_output.stdout
 
-    - name: Wait for 60 seconds using sleep command
-      shell: sleep 60
-
     - name: Ensure coreutils is installed (provides stty)
       apt:
         name: coreutils
