@@ -14,6 +14,9 @@
 
     - name: Send the .bin file to /dev/ttyUSB0
       shell: cat /root/binary/start_screen.bin > /dev/ttyUSB0
+
+    - name: Wait for 30 seconds using sleep command
+      shell: sleep 30
     
     - name: Start the Proxmox VM using qm
       shell:
