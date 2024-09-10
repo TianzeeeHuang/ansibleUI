@@ -10,10 +10,10 @@
       become: true
 
     - name: Configure serial port /dev/ttyUSB0 with stty
-      command: stty -F /dev/ttyUSB0 9600 cs8 -cstopb -parenb
+      shell: stty -F /dev/ttyUSB0 9600 cs8 -cstopb -parenb
 
     - name: Send the .bin file to /dev/ttyUSB0
-      command: cat /root/binary/start_screen.bin > /dev/ttyUSB0
+      shell: cat /root/binary/start_screen.bin > /dev/ttyUSB0
     
     - name: Start the Proxmox VM using qm
       shell:
